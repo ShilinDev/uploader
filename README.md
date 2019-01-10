@@ -10,3 +10,7 @@
 - Корректное завершение приложения при получении сигнала ОС (graceful shutdown).
 - Dockerfile и docker-compose.yml, которые позволяют поднять приложение единой docker-compose up командой.
 - Модульные тесты, функциональные тесты, CI интеграция (Travis CI, Circle CI, другие).
+# Запуск
+```
+docker-compose up -d nginx mysql workspace 
+```

@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Jobs\UploadImage;
 use Illuminate\Http\Request;
-use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic as Imagick;
+
+
+
+use App\Image;
 
 class UploadController extends Controller
 {
@@ -12,9 +17,13 @@ class UploadController extends Controller
     {
         $this->validate($request, ['image' => 'required|image|max:2000']);
         $file = $request->file('image');
-        $filename = public_path('images').time().'.'.$file->extension();
-        Image::make($file)
-            ->save($filename);
-//        $this->dispatch(new UploadImage($file));
+        $filename = $file->getFilename().'.'.$file->extension();
+        Storage::disk('images')->put($filename, File::get($file));
+        Storage::disk('previews')->put($filename, Imagick::make($file)->resize(100,100)->save() );
+        $image = new Image();
+        $image->original_filename = $file->getClientOriginalName();
+        $image->filename = $filename;
+        $image->mime = $file->getClientMimeType();
+        $image->save();
     }
 }

@@ -47,8 +47,6 @@ class ImageController extends Controller
      */
     public function show(Image $image)
     {
-        ImageResource::withoutWrapping();
-
         return new ImageResource($image);
     }
 

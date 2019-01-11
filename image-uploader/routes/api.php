@@ -1,6 +1,8 @@
 <?php
 
+use App\Image;
 use Illuminate\Http\Request;
+use \App\Http\Resources\ImageResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,3 +23,8 @@ Route::post('/upload', 'UploadController@upload');
 
 Route::get('images/{id}','ViewController@getImage');
 
+Route::resource('images','ImageController');
+
+Route::get('/test', function () {
+    return ImageResource::collection(Image::all());
+});

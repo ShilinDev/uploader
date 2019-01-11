@@ -18,9 +18,9 @@ class ImageResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'fileName' => $this->filename,
             'link' => asset('storage/images/' . $this->filename),
-            'thumbLink' => asset('storage/previews/' . $this->filename)
+            'thumbLink' => asset('storage/previews/' . $this->filename),
+            'createTime' => $this->created_at
         ];
     }
 }

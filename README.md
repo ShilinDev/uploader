@@ -12,5 +12,5 @@
 - Модульные тесты, функциональные тесты, CI интеграция (Travis CI, Circle CI, другие).
 # Запуск
 ```
-docker-compose up -d nginx mysql workspace 
+docker-compose up -d nginx mysql redis workspace laravel-horizon
 ```

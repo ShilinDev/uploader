@@ -17,7 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/upload', 'API\UploadController@upload');
+Route::post('/upload', 'UploadController@upload');
 
-Route::get('images/{io}','API\ViewController@getImage');
+Route::get('images/{id}','ViewController@getImage');
 

@@ -40,15 +40,16 @@ class UploadController extends Controller
     private function uploadFormData($files): \Illuminate\Http\JsonResponse
     {
         $files = is_array($files) ? $files : [$files];
+        $filenames = [];
         foreach ($files as $file) {
-            $filename = $file->getFilename() . '.' . $file->extension();
+            $filenames[] = $filename = $file->getFilename() . '.' . $file->extension();
             Storage::disk('images')->put($filename, File::get($file));
             Storage::disk('previews')->put($filename, Imagick::make($file)
                 ->resize(100, 100)->save());
             $this->saveImage($file, $filename);
         }
 
-        return response()->json('successfully added', 201);
+        return response()->json($filenames, 201);
     }
 
     /**
@@ -97,7 +98,7 @@ class UploadController extends Controller
     private function uploadUrls($json): \Illuminate\Http\JsonResponse
     {
         $urls = is_array($json->urls) ? $json->urls : [$json->urls];
-
+        $filenames = [];
         foreach ($urls as $url) {
             if ($this->checkRemoteFile($url)) {
                 $info = pathinfo($url);
@@ -107,7 +108,7 @@ class UploadController extends Controller
                 file_put_contents($tempFile, $contents);
 
                 $file = new UploadedFile($tempFile, $info['basename']);
-                $filename = uniqid() . '.' . $file->getExtension();
+                $filenames[] = $filename = uniqid() . '.' . $file->getExtension();
                 Storage::disk('images')->put($filename, File::get($file));
                 Storage::disk('previews')->put($filename, Imagick::make($file)
                     ->resize(100, 100)->save());
@@ -115,7 +116,7 @@ class UploadController extends Controller
             }
         }
 
-        return response()->json('successfully added', 201);
+        return response()->json($filenames, 201);
     }
 
     /**
@@ -127,17 +128,18 @@ class UploadController extends Controller
     private function uploadBase64($json): \Illuminate\Http\JsonResponse
     {
         $files = is_array($json->base64) ? $json->base64 : [$json->base64];
+        $filenames = [];
         foreach ($files as $file) {
             preg_match_all('/data\:image\/([a-zA-Z]+)\;base64/', $file, $matched);
             $ext = isset($matched[1]) ? reset($matched[1]) : false;
-            $filename = uniqid() . '.' . $ext;
+            $filenames[] = $filename = uniqid() . '.' . $ext;
             Imagick::make($file)->save(storage_path('app/public/images/') . $filename);
             Imagick::make($file)
                 ->resize(100, 100)->save(storage_path('app/public/previews/') . $filename);
             $this->saveBase64Image($filename,$ext);
         }
 
-        return response()->json('successfully added', 201);
+        return response()->json($filenames, 201);
     }
 
     /**

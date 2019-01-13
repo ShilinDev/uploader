@@ -8,6 +8,7 @@ before_script:
 #  - mysql -e 'create database homestead_test;'
   - cd image-uploader
   - composer install --no-interaction
+  - php artisan key:generate
 #
 #script:
 #  - vendor/bin/phpunit

@@ -1,34 +1,71 @@
 [![Build Status](https://travis-ci.org/ShilinDev/uploader.png?branch=master)](https://travis-ci.org/ShilinDev/uploader)
+# Содержание:
+- [Задание](#задание)
+- [Требования](#требования)
+- [Обзор реализации](#обзор)
+- [Запуск окружения и проекта](#запуск)
+- [Документация](#документация)
+- [Примеры](#пример)
 
-# Задание:
+
+## Задание:
 Реализовать простое REST API с одним единственным методом, который загружает изображения.
-# Требования:
+## Требования:
 - Возможность загружать несколько файлов.
 - Возможность принимать multipart/form-data запросы.
 - Возможность принимать JSON запросы с BASE64 закодированными изображениями.
 - Возможность загружать изображения по заданному URL (изображение размещено где-то в интернете).
 - Создание квадратного превью изображения размером 100px на 100px.
-# Следующее будет плюсом:
 - Корректное завершение приложения при получении сигнала ОС (graceful shutdown).
 - Dockerfile и docker-compose.yml, которые позволяют поднять приложение единой docker-compose up командой.
 - Модульные тесты, функциональные тесты, CI интеграция (Travis CI, Circle CI, другие).
-# Обзор реализации
-- Используется Laradock в качестве среды разработки для Docker.
+## Обзор реализации
+- Используется Laradock в качестве среды разработки для Docker, используемые контейнеры nginx mysql workspace
 - Реализация на PHP 7.2 + Laravel 5.7
 - База данных Mysql 5.5
- todo..
-# Запуск
-В папке laradock
+## Запуск окружения и проекта:
+Заходим в папку laradock, создаем .env файл:
+```
+cd laradock
+cp env-example .env
+```
+Откройте .env и измените слудующее:
+```
+APP_CODE_PATH_HOST=../image-uploader/
+MYSQL_VERSION=5.5
+```
+Далее запуск контейнеров:
 ```
 docker-compose up -d nginx mysql workspace
 ```
-
-# Документация API
+Заходим в workspace контейнер
 ```
-    api/documentation
+docker-compose exec workspace bash
+```
+Выполняем следующие команды для запуска проекта:
+```
+cp .env.example .env
+```
+Откройте .env и измените конфиг для хоста mysql:
+```
+DB_HOST=mysql
+```
+Далее:
+```
+composer install
+php artisan key:generate
+php artisan migrate
+php artisan l5-swagger:generate
 ```
 
-# Формат передачи
+После этого http://localhost должен отобразить стандартную laravel главную страницу.
+
+## Документация API
+```
+<HOST_URL>/api/documentation
+```
+
+## Примеры
 URL
 ```
 POST /api/upload HTTP/1.1

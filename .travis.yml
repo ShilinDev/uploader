@@ -6,10 +6,11 @@ php:
 before_script:
   - cd image-uploader
   - cp .env.travis .env
-#  - mysql -e 'create database homestead_test;'
+  - mysql -e 'CREATE DATABASE uploader_test;'
   - composer install --no-interaction
   - php artisan key:generate
   - php artisan migrate
+  -
 
 script:
   - phpunit

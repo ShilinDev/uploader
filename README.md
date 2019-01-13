@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ShilinDev/uploader.png?branch=master)](https://travis-ci.org/ShilinDev/uploader})
+[![Build Status](https://travis-ci.org/ShilinDev/uploader.png?branch=master)](https://travis-ci.org/ShilinDev/uploader)
 
 # Задание:
 Реализовать простое REST API с одним единственным методом, который загружает изображения.

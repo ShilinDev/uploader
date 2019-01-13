@@ -3,11 +3,12 @@ language: php
 php:
   - 7.2
 
-#before_script:
+before_script:
 #  - cp .env.travis .env
 #  - mysql -e 'create database homestead_test;'
 #  - composer self-update
 #  - composer install --no-interaction
+  - cd image-uploader
 #
 #script:
 #  - vendor/bin/phpunit

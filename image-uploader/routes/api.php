@@ -21,6 +21,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/upload', 'UploadController@upload');
 
-Route::get('/images/{id}', 'ViewController@getImage');
 Route::get('/images', 'ViewController@getImages');
 Route::get('/originalImagesInfo', 'ViewController@getOriginalImages');

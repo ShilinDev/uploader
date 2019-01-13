@@ -10,10 +10,6 @@ use App\Http\Resources\ImageCollection;
 
 class ViewController extends Controller
 {
-    public function getImage()
-    {
-        return ImageResource::collection(Image::all());
-    }
 
     /**
      * @SWG\Get(
@@ -33,6 +29,19 @@ class ViewController extends Controller
         return ImageResource::collection(Image::all());
     }
 
+    /**
+     * @SWG\Get(
+     *     path="/api/originalImagesInfo",
+     *     summary="Получить список оригинальных данных по изображениям из базы с пагинацией",
+     *     tags={"Images"},
+     *     description="Получаем список доступных изображений с пагинацией",
+     *     @SWG\Response(
+     *         response=200,
+     *         description="successful operation",
+     *         @SWG\Schema(ref="#/definitions/Image"),
+     *     )
+     * )
+     */
     public function getOriginalImages()
     {
         return new ImageCollection(Image::paginate());

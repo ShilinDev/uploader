@@ -29,11 +29,6 @@
 cd laradock
 cp env-example .env
 ```
-Откройте .env и измените слудующее:
-```
-APP_CODE_PATH_HOST=../image-uploader/
-MYSQL_VERSION=5.5
-```
 Далее запуск контейнеров:
 ```
 docker-compose up -d nginx mysql workspace

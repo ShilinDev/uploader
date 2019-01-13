@@ -2,8 +2,7 @@
 
 use App\Image;
 use Illuminate\Http\Request;
-use \App\Http\Resources\ImageResource;
-use App\Http\Resources\ImageCollection;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -23,11 +22,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::post('/upload', 'UploadController@upload');
 
 Route::get('/images/{id}', 'ViewController@getImage');
-
-Route::get('/images', function () {
-    return ImageResource::collection(Image::all());
-});
-
-Route::get('/originalImagesInfo', function () {
-    return new ImageCollection(Image::paginate());
-});
+Route::get('/images', 'ViewController@getImages');
+Route::get('/originalImagesInfo', 'ViewController@getOriginalImages');

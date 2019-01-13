@@ -1,0 +1,82 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "image uploader API",
+        "version": "1.0.0"
+    },
+    "host": "localhost",
+    "basePath": "/",
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/api/upload": {
+            "post": {
+                "tags": [
+                    "Images"
+                ],
+                "summary": "\u0417\u0430\u0433\u0440\u0443\u0437\u043a\u0430 \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u044f \u043d\u0430 \u0441\u0435\u0440\u0432\u0435\u0440",
+                "description": "\u0417\u0430\u0433\u0440\u0443\u0437\u043a\u0430 \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u044f \u043d\u0430 \u0441\u0435\u0440\u0432\u0435\u0440, \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u0438\u0432\u0430\u0435\u0442\u0441\u044f \u0437\u0430\u0433\u0440\u0443\u0437\u043a\u0430 \u0447\u0435\u0440\u0435\u0437 \u043f\u0435\u0440\u0435\u0434\u0430\u0447\u0443 \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0439 \u0432\n                      1) form-data \u0432 \u043a\u043b\u044e\u0447\u0435 image;\n                      2) URL \u0432 \u043a\u043b\u044e\u0447\u0435 urls;\n                      3) Base64 \u0432 \u043a\u043b\u044e\u0447\u0435 base64\n          \u041f\u0440\u0438\u043c\u0435\u0440:\n          \n                POST /api/upload HTTP/1.1\n                Host: localhost\n                Content-Type: application/json\n                Cache-Control: no-cache\n\n                {\n                    'urls':[\n                        'https://jsoneditoronline.org/doc/img/code_editor12312.png',\n                        'https://cdn-images-1.medium.com/max/1600/1*aXW_00lLrZn0_V4ytKoQUw.gif'\n                        ]\n                }",
+                "responses": {
+                    "201": {
+                        "description": "\u041c\u0430\u0441\u0441\u0438\u0432 \u0438\u043c\u0435\u043d \u0441\u043e\u0437\u0434\u0430\u043d\u043d\u044b\u0445 \u0444\u0430\u0439\u043b\u043e\u0432"
+                    },
+                    "401": {
+                        "description": "Incorrect request"
+                    }
+                }
+            }
+        },
+        "/api/images": {
+            "get": {
+                "tags": [
+                    "Images"
+                ],
+                "summary": "\u041f\u043e\u043b\u0443\u0447\u0438\u0442\u044c \u0441\u043f\u0438\u0441\u043e\u043a \u0434\u043e\u0441\u0442\u0443\u043f\u043d\u044b\u0445 \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0439",
+                "description": "\u041f\u043e\u043b\u0443\u0447\u0430\u0435\u043c \u0441\u043f\u0438\u0441\u043e\u043a \u0434\u043e\u0441\u0442\u0443\u043f\u043d\u044b\u0445 \u0438\u0437\u043e\u0431\u0440\u0430\u0436\u0435\u043d\u0438\u0439",
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "$ref": "#/definitions/ImageResource"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ImageResource": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "link": {
+                    "type": "string"
+                },
+                "thumbLink": {
+                    "type": "string"
+                },
+                "createTime": {
+                    "type": "object"
+                }
+            }
+        },
+        "Image": {
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "filename": {
+                    "type": "string"
+                },
+                "mime": {
+                    "type": "string"
+                },
+                "original_filename": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

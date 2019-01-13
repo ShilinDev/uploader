@@ -7,6 +7,17 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
+/**
+ * @SWG\Swagger(
+ *   schemes={"http"},
+ *   host="localhost",
+ *   basePath="/",
+ *   @SWG\Info(
+ *     title="image uploader API",
+ *     version="1.0.0"
+ *   )
+ * )
+ */
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;

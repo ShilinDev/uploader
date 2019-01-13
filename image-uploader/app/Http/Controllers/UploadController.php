@@ -14,6 +14,10 @@ class UploadController extends Controller
 {
     const TYPE_JSON = 'application/json';
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function upload(Request $request): \Illuminate\Http\JsonResponse
     {
         if ($request->hasFile('image')) {

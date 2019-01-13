@@ -34,9 +34,6 @@ class UploadImage implements ShouldQueue
      */
     public function handle()
     {
-        Image::make($this->file)
-            ->fit(200, 200)
-            ->save('uploads/bla-bla'.time(), 80);
-        var_dump('ready');
+
     }
 }
